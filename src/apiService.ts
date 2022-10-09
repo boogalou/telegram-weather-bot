@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { IWeatherResponse } from "./type";
-import * as process from "process";
+require('dotenv').config()
 
-const TOKEN = process.env.WEATHER_TOKEN;
+
 
 
 export class ApiService {
@@ -12,7 +12,7 @@ export class ApiService {
       params: {
         q: city,
         days: 7,
-        key: TOKEN,
+        key: process.env.WEATHER_TOKEN,
         aqi: 'yes',
         alerts: 'no',
       }
