@@ -1,11 +1,11 @@
 import { ApiService } from "./apiService";
-const { Telegraf, Markup } = require('telegraf');
+const { Telegraf, Markup, Context } = require('telegraf');
 require('dotenv').config()
 
 
+const token = process.env.TOKEN!;
 
-
-const bot = new Telegraf('5753169444:AAFdMrKz9sZhY-S184sOIJbDc3PQVOvXBj0');
+const bot = new Telegraf(process.env.TOKEN);
 
 bot.start(async (ctx: any) => {
   await ctx.reply('Привет, я погодный бот, и я умею показывать погоду', Markup.inlineKeyboard([
