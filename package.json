@@ -1,14 +1,12 @@
 {
   "name": "TestCase",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./dist/src/main.js",
+    "start": "node ./public/main.js",
     "dev": "nodemon",
-    "build": "tsc",
-    "generate": "prisma generate",
-    "lint:fix": "eslint ./src/** --fix"
+    "build": "tsc"
   },
   "dependencies": {
     "axios": "^1.1.2",
