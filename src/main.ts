@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const token = process.env.TOKEN!;
 
-const bot = new Telegraf(process.env.TOKEN);
+const bot = new Telegraf(token);
 
 bot.start(async (ctx: any) => {
   await ctx.reply('Привет, я погодный бот, и я умею показывать погоду', Markup.inlineKeyboard([
