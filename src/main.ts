@@ -1,7 +1,5 @@
 import { ApiService } from "./apiService";
-import { Telegraf, Markup, Composer, Scenes, session } from "telegraf";
-import { convertTime } from "./convertTime";
-
+const { Telegraf, Markup, Context } = require('telegraf');
 require('dotenv').config()
 
 
@@ -9,19 +7,19 @@ const token = process.env.TOKEN!;
 
 const bot = new Telegraf(token);
 
-bot.start(async (ctx) => {
+bot.start(async (ctx: any) => {
   await ctx.reply('Привет, я погодный бот, и я умею показывать погоду', Markup.inlineKeyboard([
     Markup.button.callback('Узнать погоду?', 'yes')
   ]))
 
 });
 
-bot.action('yes', async (ctx) => {
+bot.action('yes', async (ctx: any) => {
   await ctx.answerCbQuery();
   await ctx.reply('Отправь название своего города в ответном сообщении')
 });
 
-bot.on('text', async (ctx) => {
+bot.on('text', async (ctx: any) => {
   const city = ctx.message.text
   const response = await ApiService.getCurrentWeather(city);
   const { location, current, forecast } = response.data;
@@ -31,7 +29,7 @@ bot.on('text', async (ctx) => {
     Markup.button.callback('Погода на три дня', 'three')
   ]) )
 
-  bot.action('today', async (ctx) => {
+  bot.action('today', async (ctx: any) => {
     await ctx.answerCbQuery();
     const {country, region, name, localtime} = location;
     const {temp_c, wind_kph, wind_dir, condition, pressure_mb, humidity} = current;
