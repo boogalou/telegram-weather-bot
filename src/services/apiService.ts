@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IWeatherResponse } from "./type";
+import { IWeatherResponse } from "../type";
 require('dotenv').config()
 
 
