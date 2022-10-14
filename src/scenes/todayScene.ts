@@ -8,6 +8,7 @@ todayScene.on('text', async (ctx) => {
   const city = ctx.message.text;
   const response = await apiService.getWeather(city)
 
+  console.log(response.data)
 
   await ctx.replyWithHTML
   (`<b>${response.data.location.country}</b>
@@ -21,7 +22,7 @@ todayScene.on('text', async (ctx) => {
    🕛 Атм. давление ${response.data.current.pressure_mb} мбар 
    ☂️ Влажность ${response.data.current.humidity} %`
   )
-  todayScene.leave()
+  await todayScene.leave()
 })
 
 
