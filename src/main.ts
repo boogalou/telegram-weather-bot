@@ -1,7 +1,6 @@
 import { botInit } from "./bot";
 
-
-const  main = async () => {
+const main = async () => {
   try {
     await botInit().launch()
   } catch (err) {

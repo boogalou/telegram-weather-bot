@@ -1,18 +1,28 @@
-import { Context, Telegraf } from "telegraf";
-require('dotenv').config()
-import { backMenu, start } from "./controllers/commands";
-import { CMD_TEXT } from "./constants";
+import { Markup, Scenes, session, Telegraf, } from "telegraf";
+import 'dotenv/config';
+import { todayScene } from "./scenes/todayScene";
 
-const bot = new Telegraf(process.env.TEST_BOT_TOKEN!);
+
+
+const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN!);
+  const { enter, leave } = Scenes.Stage;
+
+const stage = new Scenes.Stage<Scenes.SceneContext>([todayScene]);
 
 export const botInit = () => {
-  bot.use((ctx: Context, next) => {
-    console.log(ctx);
+
+  bot.use(session());
+  bot.use(stage.middleware());
+
+  bot.use((ctx, next) => {
     return next();
   })
 
-  bot.start(start);
-  bot.hears(CMD_TEXT.menu, backMenu)
+  bot.start(async (ctx) => ctx.reply('Welcome to weather bot', Markup.keyboard(
+    ["/get"])
+    .oneTime()
+    .resize()));
 
+  bot.command('get', (ctx) => ctx.scene.enter('today'))
   return bot;
 }

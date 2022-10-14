@@ -7,7 +7,7 @@ require('dotenv').config()
 
 export class ApiService {
 
-  static async getCurrentWeather(city: string | number): Promise<AxiosResponse<IWeatherResponse>> {
+   async getWeather(city: string): Promise<AxiosResponse<IWeatherResponse>> {
     return await axios.get(`https://api.weatherapi.com/v1/forecast.json`, {
       params: {
         q: city,
@@ -19,3 +19,5 @@ export class ApiService {
     });
   }
 }
+
+export const apiService = new ApiService()
