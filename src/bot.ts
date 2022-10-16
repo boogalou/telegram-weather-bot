@@ -4,7 +4,7 @@ import { todayScene } from "./scenes/todayScene";
 import { tomorrowScene } from "./scenes/tomorrowScene";
 
 
-const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN!);
+const bot = new Telegraf<Scenes.SceneContext>(process.env.TEST_BOT_TOKEN!);
 const { enter, leave } = Scenes.Stage;
 
 const stage = new Scenes.Stage<Scenes.SceneContext>([todayScene, tomorrowScene]);
