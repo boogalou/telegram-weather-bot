@@ -30,7 +30,9 @@ export type CurrentWeather = {
 }
 
 export type Forecastday = {
-  day: Record<string, string | number | ConditionWeather>
+  date: string;
+  date_epoch: number;
+  day: Record<string, (string | number) &  ConditionWeather>
   astro: Record<string, string>
-  hour: Record<string, string | number | ConditionWeather>
+  hour: Record<string, (string | number) & ConditionWeather>[]
 }

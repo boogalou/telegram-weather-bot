@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { IWeatherResponse } from "../type";
+import { IWeatherResponse } from "../types";
 require('dotenv').config()
 
 
@@ -11,7 +11,7 @@ export class ApiService {
     return await axios.get(`https://api.weatherapi.com/v1/forecast.json`, {
       params: {
         q: city,
-        days: 7,
+        days: 2,
         key: process.env.WEATHER_TOKEN,
         aqi: 'yes',
         alerts: 'no',

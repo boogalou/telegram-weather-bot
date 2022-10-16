@@ -1,13 +1,13 @@
 import { Markup, Scenes, session, Telegraf, } from "telegraf";
 import 'dotenv/config';
 import { todayScene } from "./scenes/todayScene";
-
+import { tomorrowScene } from "./scenes/tomorrowScene";
 
 
 const bot = new Telegraf<Scenes.SceneContext>(process.env.BOT_TOKEN!);
-  const { enter, leave } = Scenes.Stage;
+const { enter, leave } = Scenes.Stage;
 
-const stage = new Scenes.Stage<Scenes.SceneContext>([todayScene]);
+const stage = new Scenes.Stage<Scenes.SceneContext>([todayScene, tomorrowScene]);
 
 export const botInit = () => {
 
@@ -18,11 +18,18 @@ export const botInit = () => {
     return next();
   })
 
-  bot.start(async (ctx) => ctx.reply('Welcome to weather bot', Markup.keyboard(
-    ["/get"])
-    .oneTime()
-    .resize()));
+  bot.start(async ctx => {
+     await ctx.reply(
+      "Добро пожаловать в погодный бот.",
+      Markup.keyboard([
+        ["сегодня", "завтра"],
+      ])
+        .oneTime()
+        .resize(),
+    );
+  });
 
-  bot.command('get', (ctx) => ctx.scene.enter('today'))
+  bot.hears("сегодня", (ctx) => ctx.scene.enter('today'))
+  bot.hears("завтра", (ctx) => ctx.scene.enter('tomorrow'))
   return bot;
 }
